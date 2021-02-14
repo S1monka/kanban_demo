@@ -18,7 +18,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void logIn({@required username, @required password}) async {
-    emit(AuthLoginInProcess());
+    emit(AuthLoginInProgress());
 
     try {
       String token = await _authRepository

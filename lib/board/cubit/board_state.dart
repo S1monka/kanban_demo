@@ -9,18 +9,16 @@ abstract class BoardState extends Equatable {
 
 class BoardInitial extends BoardState {}
 
-class BoardTabChanged extends BoardState {
+class BoardTabChangeInProgress extends BoardState {
   final int tabIndex;
-  BoardTabChanged({@required this.tabIndex});
+  BoardTabChangeInProgress({@required this.tabIndex});
 
   @override
   List<Object> get props => [];
 
   @override
-  String toString() => 'BoardTabChanged(tabIndex: $tabIndex)';
+  String toString() => 'BoardTabChangeInProgress(tabIndex: $tabIndex)';
 }
-
-class BoardTabLoadingInProgress extends BoardState {}
 
 class BoardTabLoadingSuccess extends BoardState {
   final List<Card> cards;

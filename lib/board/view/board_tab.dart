@@ -11,7 +11,7 @@ class BoardTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BoardCubit, BoardState>(
       builder: (context, state) {
-        if (state is BoardTabLoadingInProgress)
+        if (state is BoardTabChangeInProgress)
           return Center(
             child: CircularProgressIndicator(),
           );
