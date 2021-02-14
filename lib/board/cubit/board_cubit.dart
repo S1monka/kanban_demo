@@ -17,8 +17,7 @@ class BoardCubit extends Cubit<BoardState> {
   }
 
   void tabChanged(int tabIndex) async {
-    emit(BoardTabChanged(tabIndex: tabIndex));
-    emit(BoardTabLoadingInProgress());
+    emit(BoardTabChangeInProgress(tabIndex: tabIndex));
 
     try {
       final cards = await _boardRepository.getCardsByBoardTab(

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../constants/enums.dart';
 
 import '../../auth/cubit/auth_cubit.dart';
 import '../cubit/board_cubit.dart';
@@ -12,30 +14,14 @@ class BoardScreen extends StatefulWidget {
 
 class _BoardScreenState extends State<BoardScreen>
     with SingleTickerProviderStateMixin {
-  final List<Tab> _boardTabs = [
-    Tab(
-      text: "On hold",
-    ),
-    Tab(
-      text: "In progress",
-    ),
-    Tab(
-      text: "Needs reveal",
-    ),
-    Tab(
-      text: "Approved",
-    )
-  ];
-
   TabController _tabController;
-  int _currentTabIndex = 0;
 
   void _tabChanged() =>
       context.read<BoardCubit>().tabChanged(_tabController.index);
 
   @override
   void initState() {
-    _tabController = TabController(length: _boardTabs.length, vsync: this);
+    _tabController = TabController(length: Tabs.values.length, vsync: this);
 
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) _tabChanged();
@@ -52,10 +38,20 @@ class _BoardScreenState extends State<BoardScreen>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: _boardTabs.length,
+      length: Tabs.values.length,
       child: Scaffold(
         appBar: AppBar(
           actions: [
+            IconButton(
+              icon: Icon(Icons.language),
+              onPressed: () => setState(
+                () {
+                  context.locale = context.locale == Locale("ru")
+                      ? Locale('en')
+                      : Locale("ru");
+                },
+              ),
+            ),
             IconButton(
               icon: Icon(Icons.logout),
               onPressed: () => context.read<AuthCubit>().logout(),
@@ -65,15 +61,28 @@ class _BoardScreenState extends State<BoardScreen>
             controller: _tabController,
             onTap: (value) => _tabController.animateTo(value),
             labelPadding: EdgeInsets.symmetric(horizontal: 5),
-            tabs: _boardTabs,
+            tabs: [
+              Tab(
+                text: tr("board.tabs.on_hold"),
+              ),
+              Tab(
+                text: tr("board.tabs.in_progress"),
+              ),
+              Tab(
+                text: tr("board.tabs.need_reveal"),
+              ),
+              Tab(
+                text: tr("board.tabs.approved"),
+              )
+            ],
           ),
         ),
         body: TabBarView(
           controller: _tabController,
-          children: _boardTabs
+          children: Tabs.values
               .map(
-                (_) => BoardTab(
-                  currentTabIndex: _currentTabIndex++,
+                (Tabs tab) => BoardTab(
+                  currentTab: tab,
                 ),
               )
               .toList(),

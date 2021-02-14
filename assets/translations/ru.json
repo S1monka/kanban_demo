@@ -1,0 +1,17 @@
+{
+    "auth":{
+        "login": "Логин",
+        "login_validate": "Минимум - 4 символа",
+        "password": "Пароль",
+        "password_validate": "Минимум - 8 символов",
+        "login_button": "Войти"
+    },
+    "board":{
+        "tabs":{
+            "on_hold": "В ожидании",
+            "in_progress": "В процессе",
+            "need_reveal": "Ожидают подтверждения",
+            "approved": "Подтвержденные"
+        }
+    }
+}

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../constants/enums.dart';
 import '../cubit/board_cubit.dart';
 
 class BoardTab extends StatelessWidget {
-  final int currentTabIndex;
+  final Tabs currentTab;
 
-  const BoardTab({Key key, @required this.currentTabIndex}) : super(key: key);
+  const BoardTab({Key key, @required this.currentTab}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BoardCubit, BoardState>(
       builder: (context, state) {
-        if (state is BoardTabLoadingInProgress)
+        if (state is BoardTabChangeInProgress)
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -20,7 +21,7 @@ class BoardTab extends StatelessWidget {
             child: Text("Failed to retrive cards"),
           );
         else if (state is BoardTabLoadingSuccess &&
-            state.tabIndex == currentTabIndex) {
+            state.tabIndex == currentTab.index) {
           return state.cards.isEmpty
               ? Center(
                   child: Text("No cards on this tab"),
