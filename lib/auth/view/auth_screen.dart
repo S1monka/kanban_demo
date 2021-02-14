@@ -3,11 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubit/auth_cubit.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _loginController = TextEditingController();
+
   final _passwordController = TextEditingController();
+
+  bool _obscurePassword = true;
 
   TextFormField _buildLoginField() {
     return TextFormField(
@@ -25,14 +33,22 @@ class AuthScreen extends StatelessWidget {
     );
   }
 
-  TextFormField _buildPasswordField() {
+  Widget _buildPasswordField() {
     return TextFormField(
-      obscureText: true,
+      obscureText: _obscurePassword,
       controller: _passwordController,
       validator: (value) => value.length < 8 ? "Minimum is 8 characters" : null,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 20),
         hintText: "Password",
+        suffixIcon: IconButton(
+          icon: Icon(_obscurePassword ? Icons.lock : Icons.lock_open),
+          onPressed: () => setState(
+            () {
+              _obscurePassword = !_obscurePassword;
+            },
+          ),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
         ),
@@ -62,7 +78,7 @@ class AuthScreen extends StatelessWidget {
         builder: (context) {
           final loginState = context.watch<AuthCubit>().state;
 
-          return loginState is AuthLoginInProcess
+          return loginState is AuthLoginInProgress
               ? CircularProgressIndicator(
                   backgroundColor: Colors.white,
                 )
