@@ -10,7 +10,7 @@
         "tabs":{
             "on_hold": "On hold",
             "in_progress": "In progress",
-            "need_reveal": "Need reveal",
+            "needs_review": "Needs review",
             "approved": "Approved"
         }
     }

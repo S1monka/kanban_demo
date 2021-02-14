@@ -1,1 +1,1 @@
-enum Tabs { OnHold, InProgress, NeedReveal, Approved }
+enum Tabs { OnHold, InProgress, NeedsReview, Approved }
