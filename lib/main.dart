@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,15 @@ void main() {
       systemNavigationBarColor: Colors.black,
     ),
   );
-  runApp(App());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ru')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+      useOnlyLangCode: true,
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -30,6 +39,9 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: Colors.black,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,10 +22,10 @@ class _AuthScreenState extends State<AuthScreen> {
     return TextFormField(
       obscureText: false,
       controller: _loginController,
-      validator: (value) => value.length < 4 ? "Minimum is 4 characters" : null,
+      validator: (value) => value.length < 4 ? tr("auth.login_validate") : null,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 20),
-        hintText: "Login",
+        hintText: tr("auth.login"),
         labelStyle: TextStyle(),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32),
@@ -37,10 +38,11 @@ class _AuthScreenState extends State<AuthScreen> {
     return TextFormField(
       obscureText: _obscurePassword,
       controller: _passwordController,
-      validator: (value) => value.length < 8 ? "Minimum is 8 characters" : null,
+      validator: (value) =>
+          value.length < 8 ? tr("auth.password_validate") : null,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 20),
-        hintText: "Password",
+        hintText: tr("auth.password"),
         suffixIcon: IconButton(
           icon: Icon(_obscurePassword ? Icons.lock : Icons.lock_open),
           onPressed: () => setState(
@@ -83,7 +85,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   backgroundColor: Colors.white,
                 )
               : Text(
-                  "Log in",
+                  tr("auth.login_button"),
                   style: Theme.of(context)
                       .textTheme
                       .headline5
