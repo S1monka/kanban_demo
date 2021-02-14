@@ -69,7 +69,7 @@ class _BoardScreenState extends State<BoardScreen>
                 text: tr("board.tabs.in_progress"),
               ),
               Tab(
-                text: tr("board.tabs.need_reveal"),
+                text: tr("board.tabs.needs_review"),
               ),
               Tab(
                 text: tr("board.tabs.approved"),
