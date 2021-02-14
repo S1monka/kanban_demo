@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth/cubit/auth_cubit.dart';
 import 'auth/view/auth_screen.dart';
+import 'board/cubit/board_cubit.dart';
+import 'board/view/board_screen.dart';
 import 'utility/app_bloc_observer.dart';
 
 void main() {
@@ -33,8 +35,11 @@ class MyApp extends StatelessWidget {
         home: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {
             if (state is AuthAuthenticated)
-              return Container(
-                child: Text("Login successful"),
+              return BlocProvider<BoardCubit>(
+                create: (context) => BoardCubit(
+                  authToken: context.read<AuthCubit>().state.token,
+                ),
+                child: BoardScreen(),
               );
 
             return AuthScreen();
