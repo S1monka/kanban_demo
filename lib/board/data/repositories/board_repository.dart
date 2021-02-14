@@ -1,6 +1,7 @@
-import '../providers/board_api_provider.dart';
-import '../models/Card.dart';
 import 'package:meta/meta.dart';
+
+import '../models/Card.dart';
+import '../providers/board_api_provider.dart';
 
 class BoardRepository {
   final BoardApiProvider cardsApi = BoardApiProvider();

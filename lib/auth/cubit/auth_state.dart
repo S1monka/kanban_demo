@@ -21,7 +21,7 @@ class AuthAuthenticated extends AuthState {
   String toString() => 'AuthAuthenticated(token: $token)';
 }
 
-class AuthLoginInProcess extends AuthState {}
+class AuthLoginInProgress extends AuthState {}
 
 class AuthLoginSuccess extends AuthState {}
 

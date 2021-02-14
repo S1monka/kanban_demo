@@ -1,0 +1,17 @@
+{
+    "auth":{
+        "login": "Login",
+        "login_validate": "Minimum is 4 symbols",
+        "password": "Password",
+        "password_validate": "Minimum is 8 symbols",
+        "login_button": "Log In"
+    },
+    "board":{
+        "tabs":{
+            "on_hold": "On hold",
+            "in_progress": "In progress",
+            "need_reveal": "Need reveal",
+            "approved": "Approved"
+        }
+    }
+}
