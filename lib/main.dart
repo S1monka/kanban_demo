@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth/cubit/auth_cubit.dart';
@@ -9,11 +10,16 @@ import 'utility/app_bloc_observer.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
-
-  runApp(MyApp());
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.black,
+    ),
+  );
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
